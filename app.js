@@ -1,3 +1,5 @@
+require("dotenv").config();
+
 const express = require("express");
 const app = express();
 const https = require("https");
@@ -28,10 +30,11 @@ app.post("/", (req, res) => {
     ],
   };
   const jsonData = JSON.stringify(data);
+  console.log(process.env.API_KEY);
   const url = "https://us13.api.mailchimp.com/3.0/lists/fe1a22cf79";
   const options = {
     method: "POST",
-    auth: "abhishek:afad7e7fbc6afe5f5275e6af0c9393b0-us13",
+    auth: "abhishek:" + process.env.API_KEY + "",
   };
   const request = https.request(url, options, (response) => {
     if (response.statusCode === 200) {
